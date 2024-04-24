@@ -14,12 +14,12 @@ func startRepl() {
 		// this reads from the standard input in the console
 		reader := bufio.NewScanner(os.Stdin)
 		// the repl is always active unless the exit command is given
-		fmt.Println("Pokedex > ")
+		fmt.Print("Pokedex > ")
 		reader.Scan()
 
 		// gets the user input from the scanner and
 		// stores it in a variable
-		userInput := splittingInput(reader.Text())
+		userInput := cleanInput(reader.Text())
 
 		// if there is no input from the user
 		// go to the next iteration
@@ -46,8 +46,8 @@ func startRepl() {
 
 }
 
-// helper function that splits the user input
-func splittingInput(text string) []string {
+// helper function that cleans up the user input
+func cleanInput(text string) []string {
 	// puts the command into lower case
 	output := strings.ToLower(text)
 	words := strings.Fields(output)
