@@ -1,14 +1,5 @@
 package pokeapi
 
-// A location Response generated from the API call
-type LocationAreasResp struct {
-	Count    int    `json:"count"`
-	Next     *string `json:"next"`
-	Previous *string    `json:"previous"`
-	Results  []struct {
-		Name string `json:"name"`
-		URL  string `json:"url"`
-	} `json:"results"`
-}
+// base url where everything comes from
+const baseURL = "https://pokeapi.co/api/v2"
 
-// testing the call to the api
