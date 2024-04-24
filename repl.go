@@ -19,15 +19,15 @@ func startRepl() {
 
 		// gets the user input from the scanner and
 		// stores it in a variable
-		userInput := cleanInput(reader.Text())
+		input := cleanInput(reader.Text())
 
 		// if there is no input from the user
 		// go to the next iteration
-		if len(userInput) == 0 {
+		if len(input) == 0 {
 			continue
 		}
 
-		commandName := userInput[0]
+		commandName := input[0]
 
 		// using the command parsed from the user
 		command, exists := getCommands()[commandName]
