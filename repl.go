@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 // initializes the repl to always be active and listening
@@ -14,9 +15,21 @@ func startRepl() {
 	// the repl is always active unless the exit command is given
 	fmt.Println("Pokedex > ")
 	reader.Scan()
-	fmt.Println("You entered:", reader.Text())
+
+	// gets the user input from the scanner and
+	// stores it in a variable
+	userInput := splittingInput(reader.Text())
+	fmt.Println(userInput)
 
 }
+
+// helper function that splits the user input
+func splittingInput(text string) []string {
+	// puts the command into lower case
+	output := strings.ToLower(text)
+	words := strings.Fields(output)
+	return words
+} 
 
 // types to architect the cliCommands
 type cliCommands struct {
