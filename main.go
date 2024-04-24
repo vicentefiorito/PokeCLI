@@ -1,24 +1,19 @@
 package main
 
 import (
-	"fmt"
-	"log"
+	"time"
 
 	"github.com/vicentefiorito/pokeCLI/internal/pokeapi"
 )
 
 
 func main() {
-	// testing the api call
-	pokeapiClient := pokeapi.NewClient()
+	pokeClient := pokeapi.NewClient(5 * time.Second)
 
-	resp, err := pokeapiClient.ListLocationAreas()
+	cfg := &config{
+		pokeapiClient: pokeClient,
 
-	if err != nil {
-		log.Fatal(err)
 	}
 
-	fmt.Println(resp)
-
-	// startRepl()
+	startRepl(cfg)
 }

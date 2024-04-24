@@ -5,11 +5,20 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"github.com/vicentefiorito/pokeCLI/internal/pokeapi"
 )
+
+// config type that keeps state
+// to keep track of pagination
+type config struct {
+	pokeapiClient pokeapi.Client
+	nextLocationAreaURL	*string
+	prevLocationAreaURL *string
+}
 
 // initializes the repl to always be active and listening
 // to the command line
-func startRepl() {
+func startRepl(cfg *config) {
 	for {
 		// this reads from the standard input in the console
 		reader := bufio.NewScanner(os.Stdin)
@@ -32,7 +41,7 @@ func startRepl() {
 		// using the command parsed from the user
 		command, exists := getCommands()[commandName]
 		if exists {
-			err := command.callback()
+			err := command.callback(cfg)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -58,7 +67,7 @@ func cleanInput(text string) []string {
 type cliCommands struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func(*config) error
 }
 
 // this function returns all the commands that are currently
@@ -76,5 +85,15 @@ func getCommands() map[string]cliCommands {
 			description: "exit the pokedex",
 			callback:    commandExit,
 		},
+		"map": {
+			name: "map",
+			description: "displays the names of 20 locations",
+			callback: commandMapf,
+		},
+		// "mapb": {
+		// 	name: "mapb",
+		// 	description: "displays the previous 20 locations",
+		// 	callback: commandMapb,
+		// }
 	}
 }
