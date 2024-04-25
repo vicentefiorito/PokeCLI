@@ -12,7 +12,7 @@ type LocationAreasResp struct {
 }
 
 // a type that represent a single area from the API Call
-type LocationArea struct {
+type Location struct {
 	EncounterMethodRates []struct {
 		EncounterMethod struct {
 			Name string `json:"name"`

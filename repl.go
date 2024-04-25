@@ -91,6 +91,11 @@ func getCommands() map[string]cliCommands {
 			description: "displays the previous 20 locations",
 			callback:    commandMapb,
 		},
+		"explore": {
+			name:        "explore <location_name>",
+			description: "explore a location and its pokemon encounters",
+			callback:    commandExplore,
+		},
 		"exit": {
 			name:        "exit",
 			description: "exit the pokedex",
