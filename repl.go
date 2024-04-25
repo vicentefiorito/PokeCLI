@@ -38,11 +38,16 @@ func startRepl(cfg *config) {
 		}
 
 		commandName := input[0]
+		// parses the command line
+		args := []string{}
+		if len(input) > 1 {
+			args = input[1:]
+		}
 
 		// using the command parsed from the user
 		command, exists := getCommands()[commandName]
 		if exists {
-			err := command.callback(cfg)
+			err := command.callback(cfg, args...)
 			if err != nil {
 				fmt.Println(err)
 			}

@@ -20,7 +20,7 @@ func (c *Client) GetLocation(location string) (Location, error) {
 		locationResp := Location{}
 		err := json.Unmarshal(data, &locationResp)
 		if err != nil {
-			fmt.Println(err)
+			return Location{}, err
 		}
 
 		return locationResp, nil
