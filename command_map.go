@@ -6,7 +6,7 @@ import (
 )
 
 // displays the 20 forward locations
-func commandMapf(cfg *config) error {
+func commandMapf(cfg *config, args ...string) error {
 
 	resp, err := cfg.pokeapiClient.ListLocationAreas(cfg.nextLocationAreaURL)
 
@@ -28,7 +28,7 @@ func commandMapf(cfg *config) error {
 }
 
 // displays the previous 20 locations
-func commandMapb(cfg *config) error {
+func commandMapb(cfg *config, args ...string) error {
 	// if we are on the first page
 	// return an error
 	if cfg.prevLocationAreaURL == nil {

@@ -5,14 +5,15 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
 	"github.com/vicentefiorito/pokeCLI/internal/pokeapi"
 )
 
 // config type that keeps state
 // to keep track of pagination
 type config struct {
-	pokeapiClient pokeapi.Client
-	nextLocationAreaURL	*string
+	pokeapiClient       pokeapi.Client
+	nextLocationAreaURL *string
 	prevLocationAreaURL *string
 }
 
@@ -67,7 +68,7 @@ func cleanInput(text string) []string {
 type cliCommands struct {
 	name        string
 	description string
-	callback    func(*config) error
+	callback    func(*config, ...string) error
 }
 
 // this function returns all the commands that are currently
@@ -81,14 +82,14 @@ func getCommands() map[string]cliCommands {
 			callback:    commandHelp,
 		},
 		"map": {
-			name: "map",
+			name:        "map",
 			description: "displays the names of 20 locations",
-			callback: commandMapf,
+			callback:    commandMapf,
 		},
 		"mapb": {
-			name: "mapb",
+			name:        "mapb",
 			description: "displays the previous 20 locations",
-			callback: commandMapb,
+			callback:    commandMapb,
 		},
 		"exit": {
 			name:        "exit",
