@@ -39,3 +39,20 @@ func (c *Cache) Get(key string) ([]byte, bool) {
 	}
 	return val.val, true
 }
+
+func (c *Cache) reapLoop(interval time.Duration) {
+	ticker := time.NewTicker(interval)
+	for range ticker.C {
+		c.reap(interval)
+	}
+}
+
+// cleans the data
+func (c *Cache) reap(interval time.Duration) {
+	timeAgo := time.Now().UTC().Add(-interval)
+	for k, v := range c.cache {
+		if v.createdAt.Before(timeAgo) {
+			delete(c.cache, k)
+		}
+	}
+}
