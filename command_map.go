@@ -3,7 +3,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"log"
 )
 
 // displays the 20 forward locations
@@ -12,7 +11,7 @@ func commandMapf(cfg *config) error {
 	resp, err := cfg.pokeapiClient.ListLocationAreas(cfg.nextLocationAreaURL)
 
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	// getting the next page
@@ -39,7 +38,7 @@ func commandMapb(cfg *config) error {
 	resp, err := cfg.pokeapiClient.ListLocationAreas(cfg.prevLocationAreaURL)
 
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	// getting the next page
