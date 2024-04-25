@@ -32,8 +32,6 @@ func (c *Client) ListLocationAreas(pageURL *string) (LocationAreasResp, error) {
 
 		return locationAreasResp, nil
 	}
-	// cache miss
-	fmt.Println("cache miss")
 
 	//making the request to the API
 	req, err := http.NewRequest("GET", fullURL, nil)
