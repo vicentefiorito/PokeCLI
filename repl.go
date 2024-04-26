@@ -15,6 +15,7 @@ type config struct {
 	pokeapiClient       pokeapi.Client
 	nextLocationAreaURL *string
 	prevLocationAreaURL *string
+	pokedex             map[string]pokeapi.Pokemon
 }
 
 // initializes the repl to always be active and listening

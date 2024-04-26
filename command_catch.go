@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"math/rand"
 )
 
 func commandCatch(cfg *config, args ...string) error {
@@ -20,6 +21,23 @@ func commandCatch(cfg *config, args ...string) error {
 		return err
 	}
 
-	fmt.Println(pokemon)
+	// generates the catch based on based experience
+	catchRate := rand.Intn(pokemon.BaseExperience)
+
+	fmt.Printf("Throwing a Pokeball at %s\n", pokemon.Name)
+	fmt.Println(catchRate)
+
+	// if catch rate is over than the treshold, then the catch
+	// fails
+	if catchRate > 40 {
+		fmt.Printf("%s escaped!\n", pokemon.Name)
+		return nil
+	}
+
+	fmt.Printf("%s was caught!\n", pokemon.Name)
+
+	// if catch successfull, add it into the user pokedex
+	cfg.pokedex[pokemon.Name] = pokemon
+
 	return nil
 }
